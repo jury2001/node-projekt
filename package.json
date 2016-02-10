@@ -1,0 +1,20 @@
+{
+  "name": "buch-musterprojekt",
+  "version": "1.0.0",
+  "description": "Nachvollziehen des ersten Beispiels im Buch",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "Serverscripting"
+  ],
+  "author": "Andreas E. Jurat",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "mongoose": "^4.4.3",
+    "passport": "^0.3.2"
+  }
+}
