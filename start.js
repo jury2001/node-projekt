@@ -1,11 +1,12 @@
 var http = require('http');
 var url = require('url');
 
-function start(){
+function start(router){
 	
 	console.log("Startet.");
 	function onRequest(request,response){
 		var pathname = url.parse(request.url).pathname;
+		router.route(pathname);
 		console.log("Anforderung für Pfad " + pathname + " erhalten.");
 		response.writeHead(200,{"Content-Type": "text/plain"});
 		response.write("Der erste Server!");
