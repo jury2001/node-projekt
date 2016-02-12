@@ -1,20 +1,32 @@
 var http = require('http');
 var url = require('url');
 
-function start(router){
+function start(route, handler){
 	
-	console.log("Startet.");
 	function onRequest(request,response){
 		var pathname = url.parse(request.url).pathname;
-		router.route(pathname);
-		console.log("Anforderung für Pfad " + pathname + " erhalten.");
-		response.writeHead(200,{"Content-Type": "text/plain"});
-		response.write("Der erste Server!");
-		response.end();
-	}
+		var content;
+		var postData='';
+		request.setEncoding("utf8");
+		if(request.method === 'POST'){
+			request.addListener("data", function(chunk){
+				postData += chunk;
+			});
+			request.addListener("end", function(){
+				content= route(handler, pathname, request, response, postData);
+			});
+		}
+		else{
+			content = route(pathname, handler, request, response);
+			if(!content){
+				response.writeHead(404,{"Content-Type": "text/plain"});
+				response.write("Not found!");
+				response.end();
+			}
+		}
 	var port= process.env.port || 1337;
 	http.createServer(onRequest).listen(port);
-	console.log("Ist gestartet.");
+	console.log("Server gestartet.");
 }
 
 exports.start = start;

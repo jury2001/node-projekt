@@ -1,8 +1,9 @@
 var server = require('./start');
 var router = require('./router');
-var requestHandler = require("./handlers");
+var requestHandlers = require("./handlers");
 var handler = {};
-handler["/"] = requestHandler.home;
-handler["/show"] = requestHandler.show;
-handler["/upload"] = requestHandler.upload;
+handler["/"] = requestHandlers.home;
+handler["/show"] = requestHandlers.show;
+handler["/upload"] = requestHandlers.upload;
+console.log(requestHandlers);
 server.start(router.route, handler);
