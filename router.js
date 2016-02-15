@@ -1,10 +1,11 @@
-function route(pathname,handler,request, response){
+function route(pathname,handler,request, response, data){
 	console.log("Route für Pfad angefordert: " + pathname);
-	if(typeof handler[pathname] === 'function'){
-		return handler[pathname](request, response);
+	var method = request.method;
+	if(typeof handler[[pathname, method]] === 'function'){
+		return handler[[pathname, method]](response, data);
 	}
 	else{
-		console.log("Keine Methode gefunden für " + pathname);
+		console.log("Keine Methode gefunden für " + pathname + " und Verb" + method);
 		return null;
 	}
 }
